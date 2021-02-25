@@ -30,12 +30,16 @@ class ConstraintDirective extends SchemaDirectiveVisitor {
       throw new Error(`Not a scalar of type ${type}`);
     }
 
+    const typeMap = this.schema.getTypeMap();
+
     if (isScalarOfTypeString) {
       field.type = new StringType(fieldName, type, this.args);
+      typeMap[field.type.name] = field.type;
     }
 
     if (isScalarOfTypeNumber) {
       field.type = new NumberType(fieldName, type, this.args);
+      typeMap[field.type.name] = field.type;
     }
 
     if (isNotNull) {

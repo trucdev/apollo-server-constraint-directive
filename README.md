@@ -14,7 +14,7 @@ If you are looking for a playground checkout this project [apollo-server-playgro
 ## Install
 
 ```bash
-npm install apollo-server-constraint-directive
+npm install apollo-server-v2-constraint-directive
 ```
 
 ## Usage
@@ -166,7 +166,7 @@ Each validation error throws a `ConstraintDirectiveError`. Combined with a forma
 
 ```js
 {
-  code: 'ERR_GRAPHQL_CONSTRAINT_VALIDATION',
+  code: 'BAD_USER_INPUT',
   fieldName: 'theFieldName',
   context: [ { arg: 'argument name which failed', value: 'value of argument' } ]
 }
@@ -174,7 +174,7 @@ Each validation error throws a `ConstraintDirectiveError`. Combined with a forma
 
 ```js
 const formatError = function (error) {
-  if (error.originalError && error.originalError.code === 'ERR_GRAPHQL_CONSTRAINT_VALIDATION') {
+  if (error.originalError && error.originalError && error.originalError.originalError && error.originalError.originalError.code === 'BAD_USER_INPUT') {
     // return a custom object
   }
   return error
